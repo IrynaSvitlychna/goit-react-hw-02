@@ -1,8 +1,8 @@
 
-// function Feedback({ children }) {
+// function Feedback({ value, children }) {
 //   return (
 //       <>
-//       <p>{children} : </p> 
+//       <p>{children} : {value}</p> 
 //      </>
 //     )  
 // }
