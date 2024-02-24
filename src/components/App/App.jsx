@@ -3,8 +3,10 @@ import { useState } from 'react';
 // import viteLogo from '/vite.svg'
 import css from './App.module.css';
 
+
 import Options from '../Options/Options';
-// import Feedback from '../Feedback/Feedback';
+import Description from '../Description/Description';
+import Feedback from '../Feedback/Feedback';
 
 
 function App() {
@@ -13,7 +15,9 @@ function App() {
 	neutral: 0,
 	bad: 0
 });
-
+ 
+  const totalFeedback = clicks.good + clicks.neutral + clicks.bad;
+  console.log(totalFeedback);
   
   const updateFeedback = feedbackType => {
   setClicks({
@@ -24,11 +28,8 @@ function App() {
   
   return (
     <>
-      <>
-        <h1>Sip Happens Café</h1>
-        <p>Please leave your feedback about our service by selecting one of the options below.</p>
-      </>
-      
+     
+      < Description />
      
       <Options value={clicks.good} onTrack={() => updateFeedback('good')}>Good</Options>
       <Options value={clicks.neutral} onTrack={() => updateFeedback('neutral')}>Neutral</Options>
@@ -37,7 +38,9 @@ function App() {
       {/* <Options value={clicks.good} onTrack={updateFeedback}>Good</Options>
       <Options value={clicks.neutral} onTrack={updateFeedback}>Neutral</Options>
       <Options value={clicks.bad} onTrack={updateFeedback}>Bad</Options>  */}
-            
+     
+      <Feedback value={clicks} />    
+      
     </>
   );
 }
