@@ -7,6 +7,7 @@ import css from './App.module.css';
 import Options from '../Options/Options';
 import Description from '../Description/Description';
 import Feedback from '../Feedback/Feedback';
+import Notification from '../Notification/Notification';
 
 
 function App() {
@@ -18,13 +19,16 @@ function App() {
  
   const totalFeedback = clicks.good + clicks.neutral + clicks.bad;
   console.log(totalFeedback);
-  
+
+  const positivFeedback = Math.round(((clicks.good + clicks.neutral) / totalFeedback) * 100);
+   
   const updateFeedback = feedbackType => {
   setClicks({
       ...clicks,
       [feedbackType]: clicks[feedbackType] + 1,
   });
   }
+  const handleReset = () => { }
   
   return (
     <>
@@ -34,14 +38,18 @@ function App() {
       <Options value={clicks.good} onTrack={() => updateFeedback('good')}>Good</Options>
       <Options value={clicks.neutral} onTrack={() => updateFeedback('neutral')}>Neutral</Options>
       <Options value={clicks.bad} onTrack={() => updateFeedback('bad')}>Bad</Options> 
-    
+
+      <Notification total={totalFeedback} />
+
+
+      {/* { clicks.good || clicks.neutral || clicks.bad != 0 && (<button >Reset</button>)} */}
       {/* <Options value={clicks.good} onTrack={updateFeedback}>Good</Options>
       <Options value={clicks.neutral} onTrack={updateFeedback}>Neutral</Options>
       <Options value={clicks.bad} onTrack={updateFeedback}>Bad</Options>  */}
      
-      <Feedback value={clicks} />    
+      <Feedback value={clicks} total={totalFeedback} positive={positivFeedback} />    
       
-    </>
+    </> 
   );
 }
 
