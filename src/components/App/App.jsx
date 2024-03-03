@@ -1,21 +1,26 @@
-import { useState } from 'react';
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import css from './App.module.css';
+import { useEffect, useState } from 'react';
 
+// import css from './App.module.css';
 
 import Options from '../Options/Options';
 import Description from '../Description/Description';
 import Feedback from '../Feedback/Feedback';
 import Notification from '../Notification/Notification';
 
-
+const getInitialclicks = () => {
+  const savedClickes = window.localStorage.getItem("saved-clicks");
+  if (savedClickes !== null) {
+    return JSON.parse(savedClickes);
+  }
+  return {
+    good: 0,
+    neutral: 0,
+    bad: 0
+  }
+}
+  
 function App() {
-  const [clicks, setClicks] = useState({
-	good: 0,
-	neutral: 0,
-	bad: 0
-});
+  const [clicks, setClicks] = useState(getInitialclicks);
  
   const totalFeedback = clicks.good + clicks.neutral + clicks.bad;
   console.log(totalFeedback);
@@ -28,7 +33,18 @@ function App() {
       [feedbackType]: clicks[feedbackType] + 1,
   });
   }
-  const handleReset = () => { }
+
+  const handleReset = () => {
+    setClicks({
+    good: 0,
+    neutral: 0,
+    bad: 0
+  });
+  };
+  
+  useEffect(() => {
+    window.localStorage.setItem("saved-clicks", JSON.stringify(clicks));
+   }, [clicks]);
   
   return (
     <>
@@ -42,12 +58,9 @@ function App() {
       { clicks === 0 && <Notification total={totalFeedback} />}
 
 
-      {(totalFeedback != 0) && (<button >Reset</button>)}
+      {(totalFeedback != 0) && (<button onClick={handleReset} >Reset</button>)}
       
-      {/* <Options value={clicks.good} onTrack={updateFeedback}>Good</Options>
-      <Options value={clicks.neutral} onTrack={updateFeedback}>Neutral</Options>
-      <Options value={clicks.bad} onTrack={updateFeedback}>Bad</Options>  */}
-     
+         
       <Feedback value={clicks} total={totalFeedback} positive={positivFeedback} />    
       
     </> 
