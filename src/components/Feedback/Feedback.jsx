@@ -1,6 +1,6 @@
 
 function Feedback({ value: { good, neutral, bad }, total, positive}) {
-    if (good || neutral || bad != 0) {
+  
         return (
       <>
         <p>Good: {good}</p>
@@ -12,6 +12,5 @@ function Feedback({ value: { good, neutral, bad }, total, positive}) {
      )  
     } 
   
- }
 
 export default Feedback

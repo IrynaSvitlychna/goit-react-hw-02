@@ -1,11 +1,12 @@
 // import Feedback from "../Feedback/Feedback"
 import css from './Options.module.css';
 
-function Options({ onTrack, children }) {
+function Options({ clicks, onTrack }) {
     return (
         <>
-            <button className={css.btn} onClick={onTrack}>{children}</button>
-                     
+            <button className={css.btn} onClick={onTrack}>Good</button>
+            <button className={css.btn} onClick={onTrack}>Neutral</button>
+             <button className={css.btn} onClick={onTrack}>Bad</button>        
         </>
     )
  }

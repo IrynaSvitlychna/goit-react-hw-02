@@ -51,14 +51,15 @@ function App() {
      
     < Description />
      
-      <Options value={clicks.good} onTrack={() => updateFeedback('good')}>Good</Options>
+      <Options value={clicks} onTrack={() => updateFeedback()}>Good</Options>
+      {/* <Options value={clicks.good} onTrack={() => updateFeedback('good')}>Good</Options>
       <Options value={clicks.neutral} onTrack={() => updateFeedback('neutral')}>Neutral</Options>
-      <Options value={clicks.bad} onTrack={() => updateFeedback('bad')}>Bad</Options> 
+      <Options value={clicks.bad} onTrack={() => updateFeedback('bad')}>Bad</Options>  */}
 
-      { clicks === 0 && <Notification total={totalFeedback} />}
+      { totalFeedback === 0 && <Notification total={totalFeedback} />}
 
 
-      {(totalFeedback != 0) && (<button onClick={handleReset} >Reset</button>)}
+      {(totalFeedback > 0) && (<button onClick={handleReset} >Reset</button>)}
       
          
       <Feedback value={clicks} total={totalFeedback} positive={positivFeedback} />    
