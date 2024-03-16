@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-// import css from './App.module.css';
 
 import Options from '../Options/Options';
 import Description from '../Description/Description';
@@ -51,21 +50,15 @@ function App() {
      
     < Description />
      
-      <Options value={clicks} onTrack={() => updateFeedback()}>Good</Options>
-      {/* <Options value={clicks.good} onTrack={() => updateFeedback('good')}>Good</Options>
-      <Options value={clicks.neutral} onTrack={() => updateFeedback('neutral')}>Neutral</Options>
-      <Options value={clicks.bad} onTrack={() => updateFeedback('bad')}>Bad</Options>  */}
+    <Options valueTotal={totalFeedback} onTrack={updateFeedback} onReset={handleReset} />
 
-      { totalFeedback === 0 && <Notification total={totalFeedback} />}
-
-
-      {(totalFeedback > 0) && (<button onClick={handleReset} >Reset</button>)}
-      
-         
-      <Feedback value={clicks} total={totalFeedback} positive={positivFeedback} />    
+    { totalFeedback === 0 && <Notification total={totalFeedback} />}
+          
+    { totalFeedback > 0 && <Feedback value={clicks} total={totalFeedback} positive={positivFeedback} />}    
       
     </> 
   );
 }
 
 export default App
+
